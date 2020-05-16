@@ -146,6 +146,7 @@ class Movie(models.Model):
         verbose_name = "Фильм"
         verbose_name_plural = "Фильмы"
 
+
 class MovieShots(models.Model):
     """Кадры из фильма"""
     title = models.CharField(
@@ -164,7 +165,7 @@ class MovieShots(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return self.title
 
     class Meta:
         verbose_name = "Кадр из фильма"
@@ -209,7 +210,6 @@ class Rating(models.Model):
     class Meta:
         verbose_name = "Рейтинг"
         verbose_name_plural = "Рейтинги"
-
 
 
 class Reviews(models.Model):
