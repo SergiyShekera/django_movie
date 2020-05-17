@@ -26,4 +26,4 @@ class AddReview(View):
             form = form.save(commit=False)
             form.movie = movie
             form.save()
-        return redirect("/")
+        return redirect(movie.get_absolute_url())
