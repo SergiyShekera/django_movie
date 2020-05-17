@@ -97,7 +97,7 @@ class Migration(migrations.Migration):
                 ('email', models.EmailField(max_length=254)),
                 ('name', models.CharField(max_length=100, verbose_name='Имя')),
                 ('text', models.TextField(max_length=5000, verbose_name='Сообщение')),
-                ('movie', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movies.Movie', verbose_name='фильм')),
+                ('movies', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movies.Movie', verbose_name='фильм')),
                 ('parent', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='movies.Reviews', verbose_name='Родитель')),
             ],
             options={
@@ -110,7 +110,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('ip', models.CharField(max_length=15, verbose_name='IP адрес')),
-                ('movie', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movies.Movie', verbose_name='фильм')),
+                ('movies', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movies.Movie', verbose_name='фильм')),
                 ('star', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movies.RatingStar', verbose_name='звезда')),
             ],
             options={
@@ -125,7 +125,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=100, verbose_name='Заголовок')),
                 ('description', models.TextField(verbose_name='Описание')),
                 ('image', models.ImageField(upload_to='movie_shots/', verbose_name='Изображение')),
-                ('movie', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movies.Movie', verbose_name='Фильм')),
+                ('movies', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movies.Movie', verbose_name='Фильм')),
             ],
             options={
                 'verbose_name': 'Кадр из фильма',
