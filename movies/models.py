@@ -102,7 +102,7 @@ class Movie(models.Model):
         verbose_name="актеры",
         related_name="film_actor"
     )
-    genre = models.ManyToManyField(
+    genres = models.ManyToManyField(
         Genre,
         verbose_name="жанры"
     )
