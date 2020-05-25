@@ -49,7 +49,7 @@ class ActorView(DetailView, GenreYear):
     slug_field = "name"
 
 
-class FilterMoviesView(GenreYear, ListView):
+class FilterMoviesView(ListView, GenreYear):
     """Фильтр фильмов"""
     def get_queryset(self):
         queryset = Movie.objects.filter(
