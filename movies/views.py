@@ -1,4 +1,4 @@
-from django.db.models import Q
+from django.db.models import Q, Avg
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView
@@ -31,6 +31,8 @@ class MovieDetailView(DetailView, GenreYear):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["star_form"] = RatingForm()
+        context["avg_rating"] = context["object"].rating_set.all() \
+            .aggregate(Avg("star")).get("star__avg")
         return context
 
 
@@ -51,7 +53,7 @@ class AddReview(View, GenreYear):
 class ActorView(DetailView, GenreYear):
     """Вывод информации о актере"""
     model = Actor
-    template_name = 'movies/actor.html'
+    template_name = "movies/actor.html"
     slug_field = "name"
 
 
