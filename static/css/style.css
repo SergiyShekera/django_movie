@@ -1,30 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
-
-@SergiyShekera
-DJWOMS
-/
-django_movie
-9
-39
-33
- Code
- Issues 0
- Pull requests 0 Actions
- Projects 0
- Wiki
- Security 0
- Insights
-django_movie/static/css/style.css
-@DJWOMS DJWOMS урок 20, add pagination
-3773d80 on 27 Feb
-1711 lines (1409 sloc)  30 KB
-
 html,
 body {
     margin: 0;
