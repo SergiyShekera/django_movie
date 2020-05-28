@@ -11,16 +11,17 @@ from .forms import ReviewForm, RatingForm
 class GenreYear:
     """Жанры и года выхода фильмов"""
     def get_genres(self):
-        return Genre.objects.all()
+        return Genre.objects.distinct()
 
     def get_years(self):
-        return Movie.objects.filter(draft=False).values("year")
+        return Movie.objects.filter(draft=False).distinct().values("year")
 
 
 class MoviesView(ListView, GenreYear):
     """Список фильмов"""
     model = Movie
     queryset = Movie.objects.filter(draft=False)
+    paginate_by = 1
 
 
 class MovieDetailView(DetailView, GenreYear):
@@ -59,12 +60,20 @@ class ActorView(DetailView, GenreYear):
 
 class FilterMoviesView(ListView, GenreYear):
     """Фильтр фильмов"""
+    paginate_by = 1
+
     def get_queryset(self):
         queryset = Movie.objects.filter(
             Q(year__in=self.request.GET.getlist("year")) |
             Q(genres__in=self.request.GET.getlist("genre"))
-        )
+        ).distinct()
         return queryset
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["year"] = "".join([f"year={x}&" for x in self.request.GET.getlist("year")])
+        context["genre"] = "".join([f"genre={x}&" for x in self.request.GET.getlist("genre")])
+        return context
 
 
 class JsonFilterMoviesView(ListView):
