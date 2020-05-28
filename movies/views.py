@@ -34,6 +34,7 @@ class MovieDetailView(DetailView, GenreYear):
         context["star_form"] = RatingForm()
         context["avg_rating"] = context["object"].rating_set.all() \
             .aggregate(Avg("star")).get("star__avg")
+        context["form"] = ReviewForm()
         return context
 
 
