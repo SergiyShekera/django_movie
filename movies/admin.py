@@ -12,12 +12,17 @@ from .models import RatingStar
 from .models import Reviews
 
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from modeltranslation.admin import TranslationAdmin
 
 
 class MovieAdminForm(forms.ModelForm):
     """Форма с виджетом ckeditor"""
-    description = forms.CharField(
-        label="Описание",
+    description_ru = forms.CharField(
+        label="Описание [ru]",
+        widget=CKEditorUploadingWidget()
+    )
+    description_en = forms.CharField(
+        label="Описание [en]",
         widget=CKEditorUploadingWidget()
     )
 
@@ -27,7 +32,7 @@ class MovieAdminForm(forms.ModelForm):
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslationAdmin):
     """Категории"""
     list_display = (
         "id",
@@ -61,7 +66,7 @@ class ReviewInline(admin.TabularInline):
 
 
 @admin.register(Movie)
-class MovieAdmin(admin.ModelAdmin):
+class MovieAdmin(TranslationAdmin):
     """Фильмы"""
     actions = ["publish", "unpublish"]
     form = MovieAdminForm
@@ -134,10 +139,10 @@ class MovieAdmin(admin.ModelAdmin):
     get_image.short_description = "Постер"
 
     publish.short_description = "Опубликовать"
-    publish.allowed_permissions = ('change', )
+    publish.allowed_permissions = ("change", )
 
     unpublish.short_description = "Снять с публикации"
-    unpublish.allowed_permissions = ('change',)
+    unpublish.allowed_permissions = ("change",)
 
 
 @admin.register(Reviews)
@@ -157,7 +162,7 @@ class ReviewAdmin(admin.ModelAdmin):
 
 
 @admin.register(Genre)
-class GenreAdmin(admin.ModelAdmin):
+class GenreAdmin(TranslationAdmin):
     """Жанры"""
     list_display = (
         "name",
@@ -166,7 +171,7 @@ class GenreAdmin(admin.ModelAdmin):
 
 
 @admin.register(Actor)
-class ActorAdmin(admin.ModelAdmin):
+class ActorAdmin(TranslationAdmin):
     """Актеры"""
     list_display = (
         "name",
@@ -192,7 +197,7 @@ class RatingAdmin(admin.ModelAdmin):
 
 
 @admin.register(MovieShots)
-class MovieShotsAdmin(admin.ModelAdmin):
+class MovieShotsAdmin(TranslationAdmin):
     """Кадры из фильма"""
     list_display = (
         "title",
